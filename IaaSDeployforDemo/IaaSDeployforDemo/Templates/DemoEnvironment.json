@@ -22,7 +22,7 @@
         },
         "adminUsername": {
           "type": "string",
-          "defaultValue": "demoadmin"
+          "defaultValue": "demoadmin",
             "metadata": {
                 "description": "Admin username for environment"
             }
