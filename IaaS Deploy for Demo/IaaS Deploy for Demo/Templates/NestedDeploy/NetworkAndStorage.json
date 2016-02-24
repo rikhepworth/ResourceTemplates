@@ -1,0 +1,70 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "VirtualNetwork": {
+      "type": "object",
+      "metadata": {
+        "description": "object containing virtual network params"
+      }
+    },
+    "StorageAccount": {
+      "type": "object",
+      "metadata": {
+        "description": "object containing storage account network params"
+      }
+    }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "name": "[parameters('StorageAccount').Name]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "[parameters('StorageAccount').Location]",
+      "apiVersion": "2015-05-01-preview",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "StorageAccount"
+      },
+      "properties": {
+        "accountType": "[parameters('StorageAccount').Type]"
+      }
+    },
+    {
+      "name": "[parameters('VirtualNetwork').Name]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[parameters('VirtualNetwork').Location]",
+      "apiVersion": "2015-05-01-preview",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "VirtualNetwork"
+      },
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[parameters('VirtualNetwork').Prefix]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[parameters('VirtualNetwork').Subnet1Name]",
+            "properties": {
+              "addressPrefix": "[parameters('VirtualNetwork').Subnet1Prefix]"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "outputs": {
+    "VirtualNetworkId": {
+      "value": "[resourceId('Microsoft.Network/virtualNetworks', parameters('VirtualNetwork').Name)]",
+      "type": "string"
+    },
+    "StorageAccountId": {
+      "value": "[resourceId('Microsoft.Storage/storageAccounts', parameters('StorageAccount').Name)]",
+      "type": "string"
+    }
+  }
+}

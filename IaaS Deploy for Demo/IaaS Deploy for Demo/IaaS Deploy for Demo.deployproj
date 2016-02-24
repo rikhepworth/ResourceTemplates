@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|AnyCPU">
+      <Configuration>Debug</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|AnyCPU">
+      <Configuration>Release</Configuration>
+      <Platform>AnyCPU</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>db3ecd05-db86-40af-be55-c33056b15317</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworkIdentifier>Deployment</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>1.0</TargetFrameworkVersion>
+    <PrepareForBuildDependsOn>
+    </PrepareForBuildDependsOn>
+  </PropertyGroup>
+  <Import Condition=" Exists('Deployment.targets') " Project="Deployment.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- vertag<:>start tokens<:>maj.min -->
+  <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
+  <!-- vertag<:>end -->
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+    <Folder Include="Tools\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CustomScript\AdfsServer.ps1" />
+    <None Include="CustomScript\DeployFunctions.ps1" />
+    <None Include="CustomScript\DomainController.ps1" />
+    <None Include="CustomScript\PSPKI.zip" />
+    <None Include="CustomScript\WapServer.ps1" />
+    <None Include="Deployment.targets">
+      <Visible>False</Visible>
+    </None>
+    <Content Include="Scripts\Deploy-AzureResourceGroup.ps1" />
+    <Content Include="Templates\DemoEnvironment.json" />
+    <None Include="DSC\dsc.zip" />
+    <None Include="DSC\DSCvmConfigs.ps1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\appveyor.yml" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\Assert-HADC.ps1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\Assert-ParentChildDomains.ps1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADDomainController\MSFT_xADDomainController.psm1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADDomainController\MSFT_xADDomainController.schema.mof" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADDomainTrust\MSFT_xADDomainTrust.psm1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADDomainTrust\MSFT_xADDomainTrust.schema.mof" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADDomain\MSFT_xADDomain.psm1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADDomain\MSFT_xADDomain.schema.mof" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADRecycleBin\Examples\xActiveDirectory_xADRecycleBin.ps1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADRecycleBin\MSFT_xADRecycleBin.psm1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADRecycleBin\MSFT_xADRecycleBin.schema.mof" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADRecycleBin\ResourceDesignerScripts\GeneratexADRecycleBinSchema.ps1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADUser\MSFT_xADUser.psm1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xADUser\MSFT_xADUser.schema.mof" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xWaitForADDomain\MSFT_xWaitForADDomain.psm1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\DSCResources\MSFT_xWaitForADDomain\MSFT_xWaitForADDomain.schema.mof" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\HADCConfiguration.psd1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\LICENSE" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\Misc\New-ADDomainTrust.ps1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\ParentChildConfig.psd1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\README.md" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\xActiveDirectory.psd1" />
+    <None Include="DSC\xActiveDirectory\2.6.0.0\xActiveDirectory_TechNetDocumentation.html" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\DSCResources\MSFT_xAdcsCertificationAuthority\MSFT_xAdcsCertificationAuthority.psm1" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\DSCResources\MSFT_xAdcsCertificationAuthority\MSFT_xAdcsCertificationAuthority.schema.mof" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\DSCResources\MSFT_xAdcsWebEnrollment\MSFT_xAdcsWebEnrollment.psm1" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\DSCResources\MSFT_xAdcsWebEnrollment\MSFT_xAdcsWebEnrollment.schema.mof" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\xAdcsDeployment.psd1" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\xAdcsDeployment_TechNetDocumentation.html" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\xCertificateServices\DSCResources\MSFT_xAdcsCertificationAuthority\MSFT_xAdcsCertificationAuthority.psm1" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\xCertificateServices\DSCResources\MSFT_xAdcsCertificationAuthority\MSFT_xAdcsCertificationAuthority.schema.mof" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\xCertificateServices\DSCResources\MSFT_xAdcsWebEnrollment\MSFT_xAdcsWebEnrollment.psm1" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\xCertificateServices\DSCResources\MSFT_xAdcsWebEnrollment\MSFT_xAdcsWebEnrollment.schema.mof" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\xCertificateServices\Examples\Config-SetupActiveDirectory.ps1" />
+    <None Include="DSC\xAdcsDeployment\0.1.0.0\xCertificateServices\xCertificateServices.psd1" />
+    <None Include="DSC\xComputerManagement\1.3.0\appveyor.yml" />
+    <None Include="DSC\xComputerManagement\1.3.0\DSCResources\MSFT_xComputer\MSFT_xComputer.psm1" />
+    <None Include="DSC\xComputerManagement\1.3.0\DSCResources\MSFT_xComputer\MSFT_xComputer.schema.mof" />
+    <None Include="DSC\xComputerManagement\1.3.0\LICENSE" />
+    <None Include="DSC\xComputerManagement\1.3.0\README.md" />
+    <None Include="DSC\xComputerManagement\1.3.0\Tests\xComputermanagement.Tests.ps1" />
+    <None Include="DSC\xComputerManagement\1.3.0\xComputerManagement.psd1" />
+    <None Include="DSC\xNetworking\2.3.0.0\appveyor.yml" />
+    <None Include="DSC\xNetworking\2.3.0.0\DSCResources\MSFT_xDNSServerAddress\MSFT_xDNSServerAddress.psm1" />
+    <None Include="DSC\xNetworking\2.3.0.0\DSCResources\MSFT_xDNSServerAddress\MSFT_xDNSServerAddress.schema.mof" />
+    <None Include="DSC\xNetworking\2.3.0.0\DSCResources\MSFT_xFirewall\MSFT_xFirewall.psm1" />
+    <None Include="DSC\xNetworking\2.3.0.0\DSCResources\MSFT_xFirewall\MSFT_xFirewall.Schema.mof" />
+    <None Include="DSC\xNetworking\2.3.0.0\DSCResources\MSFT_xIPAddress\MSFT_xIPAddress.psm1" />
+    <None Include="DSC\xNetworking\2.3.0.0\DSCResources\MSFT_xIPAddress\MSFT_xIPAddress.schema.mof" />
+    <None Include="DSC\xNetworking\2.3.0.0\Examples\Sample_xDnsServerAddress.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\Examples\Sample_xFirewall_AddFirewallRule.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\Examples\Sample_xFirewall_AddFirewallRuleToExistingGroup.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\Examples\Sample_xFirewall_AddFirewallRuleToNewGroup.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\Examples\Sample_xFirewall_DisableAccessToApplication.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\Examples\Sample_xIPAddress_FixedValue.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\Examples\Sample_xIPAddress_Parameterized.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\LICENSE" />
+    <None Include="DSC\xNetworking\2.3.0.0\README.md" />
+    <None Include="DSC\xNetworking\2.3.0.0\Tests\MSFT_xDNSServerAddress.Tests.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\Tests\MSFT_xFirewall.Tests.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\Tests\MSFT_xIPAddress.Tests.ps1" />
+    <None Include="DSC\xNetworking\2.3.0.0\xNetworking.psd1" />
+    <None Include="DSC\xSmbShare\1.1.0.0\appveyor.yml" />
+    <None Include="DSC\xSmbShare\1.1.0.0\DscResources\MSFT_xSmbShare\MSFT_xSmbShare.psm1" />
+    <None Include="DSC\xSmbShare\1.1.0.0\DscResources\MSFT_xSmbShare\MSFT_xSmbShare.schema.mof" />
+    <None Include="DSC\xSmbShare\1.1.0.0\LICENSE" />
+    <None Include="DSC\xSmbShare\1.1.0.0\README.md" />
+    <None Include="DSC\xSmbShare\1.1.0.0\xSmbShare.psd1" />
+    <None Include="DSC\xStorage\2.1.0.0\appveyor.yml" />
+    <None Include="DSC\xStorage\2.1.0.0\DSCResources\MSFT_xDisk\MSFT_xDisk.psm1" />
+    <None Include="DSC\xStorage\2.1.0.0\DSCResources\MSFT_xDisk\MSFT_xDisk.schema.mof" />
+    <None Include="DSC\xStorage\2.1.0.0\DSCResources\MSFT_xMountImage\MSFT_xMountImage.psm1" />
+    <None Include="DSC\xStorage\2.1.0.0\DSCResources\MSFT_xMountImage\MSFT_xMountImage.schema.mof" />
+    <None Include="DSC\xStorage\2.1.0.0\DSCResources\MSFT_xWaitForDisk\MSFT_xWaitForDisk.psm1" />
+    <None Include="DSC\xStorage\2.1.0.0\DSCResources\MSFT_xWaitForDisk\MSFT_xWaitForDisk.schema.mof" />
+    <None Include="DSC\xStorage\2.1.0.0\LICENSE" />
+    <None Include="DSC\xStorage\2.1.0.0\README.md" />
+    <None Include="DSC\xStorage\2.1.0.0\Resources\ExampleScript.ps1" />
+    <None Include="DSC\xStorage\2.1.0.0\Resources\xDscResourceDesigner_CreateScript.ps1" />
+    <None Include="DSC\xStorage\2.1.0.0\xStorage.psd1" />
+    <None Include="Templates\NestedDeploy\ADFSserver.json" />
+    <None Include="Templates\NestedDeploy\ADFSserverCS.json" />
+    <None Include="Templates\NestedDeploy\ADFSserverDSC.json" />
+    <None Include="Templates\NestedDeploy\DomainController.json" />
+    <None Include="Templates\NestedDeploy\DomainControllerCS.json" />
+    <None Include="Templates\NestedDeploy\DomainControllerDSC.json" />
+    <None Include="Templates\NestedDeploy\NetworkAndStorage.json" />
+    <None Include="Templates\NestedDeploy\SetStaticIP.json" />
+    <None Include="Templates\NestedDeploy\SetStaticIPpip.json" />
+    <None Include="Templates\NestedDeploy\StandardServer.json" />
+    <None Include="Templates\NestedDeploy\UpdateVNetDNS.json" />
+    <None Include="Templates\NestedDeploy\WAPServer.json" />
+    <None Include="Templates\NestedDeploy\WAPServerCS.json" />
+    <None Include="Templates\NestedDeploy\WAPServerDSC.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tools\AzCopy.exe" />
+    <Content Include="Tools\Microsoft.Data.Edm.dll">
+      <Visible>False</Visible>
+    </Content>
+    <Content Include="Tools\Microsoft.Data.OData.dll">
+      <Visible>False</Visible>
+    </Content>
+    <Content Include="Tools\Microsoft.Data.Services.Client.dll">
+      <Visible>False</Visible>
+    </Content>
+    <Content Include="Tools\Microsoft.WindowsAzure.Storage.dll">
+      <Visible>False</Visible>
+    </Content>
+    <Content Include="Tools\Microsoft.WindowsAzure.Storage.DataMovement.dll">
+      <Visible>False</Visible>
+    </Content>
+  </ItemGroup>
+  <Target Name="GetReferenceAssemblyPaths" />
+</Project>

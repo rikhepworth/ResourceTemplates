@@ -1,0 +1,87 @@
+﻿{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "VirtualNetwork": {
+            "type": "object",
+            "metadata": {
+                "description": "object containing virtual network params"
+            }
+        },
+        "adminUsername": {
+            "type": "string",
+            "metadata": {
+                "description": "Admin username for environment"
+            }
+        },
+        "adminPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "Admin password for environment"
+            }
+        },
+        "envPrefix": {
+            "type": "string",
+            "metadata": {
+                "description": "Common prefix for all resource naming"
+            }
+        },
+        "_artifactsLocation": {
+            "type": "string"
+        },
+        "_artifactsLocationSasToken": {
+            "type": "securestring"
+        },
+        "domainName": {
+            "type": "string"
+        },
+        "vmName": {
+            "type": "string"
+        },
+        "vmDCName": {
+            "type": "string"
+
+        }
+    },
+    "variables": {
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('envPrefix'),parameters('vmName'),'/',parameters('envPrefix'),parameters('vmName'),'dsc')]",
+            "type": "Microsoft.Compute/virtualMachines/extensions",
+            "location": "[parameters('VirtualNetwork').Location]",
+            "apiVersion": "2015-06-15",
+            "dependsOn": [
+            ],
+            "tags": {
+                "displayName": "ADFSserver"
+            },
+            "properties": {
+                "publisher": "Microsoft.Powershell",
+                "type": "DSC",
+                "typeHandlerVersion": "2.1",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                    "modulesUrl": "[concat(parameters('_artifactsLocation'), '/DSC/', 'dsc.zip')]",
+                    "sasToken": "[parameters('_artifactsLocationSasToken')]",
+                    "configurationFunction": "DSCvmConfigs.ps1\\ADFSserver",
+                    "properties": {
+                        "domainName": "[parameters('domainName')]",
+                        "vmDCName": "[concat(parameters('envPrefix'),parameters('vmDCName'))]",
+                        "adminCreds": {
+                            "userName": "[parameters('adminUsername')]",
+                            "password": "PrivateSettingsRef:adminPassword"
+                        }
+                    }
+                },
+                "protectedSettings": {
+                    "Items": {
+                        "adminPassword": "[parameters('adminPassword')]"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {
+    }
+}
