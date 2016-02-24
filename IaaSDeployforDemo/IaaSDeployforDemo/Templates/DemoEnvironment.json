@@ -35,7 +35,7 @@
     },
     "_artifactsLocation": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/rikhepworth/ResourceTemplates/IaaSDeployforDemo/IaaSDeployforDemo",
+      "defaultValue": "https://raw.githubusercontent.com/rikhepworth/master/ResourceTemplates/IaaSDeployforDemo/IaaSDeployforDemo",
       "metadata": {
         "description": "Storage Account/GitHub base uri for required files"
       }
@@ -45,7 +45,8 @@
     "StorageAccount": {
       "Name": "[concat(parameters('envPrefix'),'storage')]",
       "Type": "Standard_LRS",
-      "Location": "[parameters('envLocation')]"
+      "Location": "[parameters('envLocation')]",
+      "EndPoint": "blob.core.windows.net"
     },
     "VirtualNetwork": {
       "Name": "[concat(parameters('envPrefix'), 'network')]",
@@ -63,10 +64,19 @@
     "domainName": "[concat(parameters('envPrefix'), '.local')]",
     "WAPPublicDNS": "[concat(parameters('envPrefix'), 'fed')]",
     "WebPublicDNS": "[concat(parameters('envPrefix'), 'api')]",
-    "vmNames": {
-      "dc": "DC",
-      "adfs": "ADFS",
-      "wap": "WAP"
+    "vmConfiguration": {
+      "dc": {
+        "name": "DC",
+        "size": "Standard_A1"
+      },
+      "adfs": {
+        "name": "ADFS",
+        "size": "Standard_A1"
+      },
+      "wap": {
+        "name": "WAP",
+        "size": "Standard_A1"
+      }
     }
   },
   "resources": [
@@ -133,7 +143,10 @@
             "value": "[parameters('_artifactsLocation')]"
           },
           "vmName": {
-            "value": "[variables('vmNames').dc]"
+            "value": "[variables('vmConfiguration').dc.name]"
+          },
+          "vmSize": {
+            "value": "[variables('vmConfiguration').dc.size]"
           }
         }
       }
@@ -205,7 +218,10 @@
             "value": "[parameters('_artifactsLocation')]"
           },
           "vmName": {
-            "value": "[variables('vmNames').adfs]"
+            "value": "[variables('vmConfiguration').adfs.name]"
+          },
+          "vmSize": {
+            "value": "[variables('vmConfiguration').adfs.size]"
           }
         }
       }
@@ -252,7 +268,10 @@
             "value": "[parameters('_artifactsLocation')]"
           },
           "vmName": {
-            "value": "[variables('vmNames').wap]"
+            "value": "[variables('vmConfiguration').wap.name]"
+          },
+          "vmSize": {
+            "value": "[variables('vmConfiguration').wap.size]"
           }
         }
       }

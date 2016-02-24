@@ -60,7 +60,6 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "modulesUrl": "[concat(parameters('_artifactsLocation'), '/DSC/', 'dsc.zip')]",
-                    "sasToken": "[parameters('_artifactsLocationSasToken')]",
                     "configurationFunction": "DSCvmConfigs.ps1\\ADFSserver",
                     "properties": {
                         "domainName": "[parameters('domainName')]",
