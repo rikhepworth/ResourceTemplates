@@ -184,8 +184,7 @@
             "apiVersion": "2015-01-01",
             "dependsOn": [
                 "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
-                "[concat(parameters('envPrefix'),parameters('vmName'))]",
-                "Microsoft.Insights.VMDiagnosticsSettings"
+                "[concat(parameters('envPrefix'),parameters('vmName'))]"
             ],
             "properties": {
                 "mode": "Incremental",
