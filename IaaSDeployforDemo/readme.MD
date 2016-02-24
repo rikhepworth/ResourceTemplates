@@ -1,2 +1,2 @@
-<a href="https://raw.githubusercontent.com/rikhepworth/ResourceTemplates/master/IaaSDeployforDemo/IaaSDeployforDemo/Templates/DemoEnvironment.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Frikhepworth%2FResourceTemplates%2Fmaster%2FIaaSDeployforDemo%2FIaaSDeployforDemo%2FTemplates%2FDemoEnvironment.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
