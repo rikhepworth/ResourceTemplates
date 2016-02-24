@@ -188,37 +188,37 @@
           }
         ]
       },
-        {
-            "name": "SetStaticIP",
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2015-01-01",
-            "dependsOn": [
-                "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
-                "[concat(parameters('envPrefix'),parameters('vmName'))]",
-                "Microsoft.Insights.VMDiagnosticsSettings"
-            ],
-            "properties": {
-                "mode": "Incremental",
-              "templateLink": {
-                "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/SetStaticIP.json')]",
-                "contentVersion": "1.0.0.0"
-              },
-                "parameters": {
-                    "VirtualNetwork": {
-                        "value": "[parameters('VirtualNetwork')]"
-                    },
-                    "VirtualNetworkId": {
-                        "value": "[parameters('VirtualNetworkId')]"
-                    },
-                    "nicName": {
-                        "value": "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]"
-                    },
-                    "ipAddress": {
-                        "value": "[reference(concat(parameters('envPrefix'),parameters('vmName'),'nic')).ipConfigurations[0].properties.privateIPAddress]"
-                    }
-                }
+      {
+        "name": "[concat('Set',parameters('envPrefix'),parameters('vmName'),'SetStaticIP')]",
+        "type": "Microsoft.Resources/deployments",
+        "apiVersion": "2015-01-01",
+        "dependsOn": [
+          "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
+          "[concat(parameters('envPrefix'),parameters('vmName'))]",
+          "Microsoft.Insights.VMDiagnosticsSettings"
+        ],
+        "properties": {
+          "mode": "Incremental",
+          "templateLink": {
+            "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/SetStaticIP.json')]",
+            "contentVersion": "1.0.0.0"
+          },
+          "parameters": {
+            "VirtualNetwork": {
+              "value": "[parameters('VirtualNetwork')]"
+            },
+            "VirtualNetworkId": {
+              "value": "[parameters('VirtualNetworkId')]"
+            },
+            "nicName": {
+              "value": "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]"
+            },
+            "ipAddress": {
+              "value": "[reference(concat(parameters('envPrefix'),parameters('vmName'),'nic')).ipConfigurations[0].properties.privateIPAddress]"
             }
+          }
         }
+      }
     ],
     "outputs": {
         "ipAddress": {

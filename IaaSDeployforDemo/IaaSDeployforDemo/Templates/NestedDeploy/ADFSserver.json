@@ -190,7 +190,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/SetStaticIP.json')]",
+                    "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/SetStaticIP.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
