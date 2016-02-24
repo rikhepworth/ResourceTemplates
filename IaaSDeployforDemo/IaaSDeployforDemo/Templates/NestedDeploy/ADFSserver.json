@@ -50,7 +50,7 @@
                 "description": "Object containing settings for VM osProfile"
             }
         },
-        "_artifactsLocation": {
+        "artifactsLocation": {
             "type": "string"
         },
         "vmName": {

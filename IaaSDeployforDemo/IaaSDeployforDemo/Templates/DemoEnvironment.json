@@ -33,7 +33,7 @@
         "description": "Admin password for environment"
       }
     },
-    "_artifactsLocation": {
+    "artifactsLocation": {
       "type": "string",
       "defaultValue": "https://raw.githubusercontent.com/rikhepworth/master/ResourceTemplates/IaaSDeployforDemo/IaaSDeployforDemo",
       "metadata": {
@@ -88,7 +88,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/NetworkAndStorage.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/NetworkAndStorage.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -111,7 +111,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/DomainController.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/DomainController.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -139,8 +139,8 @@
           "vmImageReference": {
             "value": "[variables('StdVmImageReference')]"
           },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
+          "artifactsLocation": {
+            "value": "[parameters('artifactsLocation')]"
           },
           "vmName": {
             "value": "[variables('vmConfiguration').dc.name]"
@@ -163,7 +163,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/UpdateVNetDNS.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/UpdateVNetDNS.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -186,7 +186,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/ADFSserver.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/ADFSserver.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -214,8 +214,8 @@
           "vmImageReference": {
             "value": "[variables('StdVmImageReference')]"
           },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
+          "artifactsLocation": {
+            "value": "[parameters('artifactsLocation')]"
           },
           "vmName": {
             "value": "[variables('vmConfiguration').adfs.name]"
@@ -236,7 +236,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/WAPServer.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/WAPServer.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -264,8 +264,8 @@
           "vmImageReference": {
             "value": "[variables('StdVmImageReference')]"
           },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
+          "artifactsLocation": {
+            "value": "[parameters('artifactsLocation')]"
           },
           "vmName": {
             "value": "[variables('vmConfiguration').wap.name]"
@@ -286,7 +286,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/DomainControllerDSC.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/DomainControllerDSC.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -302,8 +302,8 @@
           "envPrefix": {
             "value": "[parameters('envPrefix')]"
           },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
+          "artifactsLocation": {
+            "value": "[parameters('artifactsLocation')]"
           },
           "domainName": {
             "value": "[variables('domainName')]"
@@ -328,7 +328,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/DomainControllerCS.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/DomainControllerCS.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -344,8 +344,8 @@
           "envPrefix": {
             "value": "[parameters('envPrefix')]"
           },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
+          "artifactsLocation": {
+            "value": "[parameters('artifactsLocation')]"
           },
           "WAPPublicDNS": {
             "value": "[reference('WAPServer').outputs.wapfqdn.value]"
@@ -368,7 +368,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/ADFSserverDSC.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/ADFSserverDSC.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -384,8 +384,8 @@
           "envPrefix": {
             "value": "[parameters('envPrefix')]"
           },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
+          "artifactsLocation": {
+            "value": "[parameters('artifactsLocation')]"
           },
           "domainName": {
             "value": "[variables('domainName')]"
@@ -404,7 +404,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/ADFSserverCS.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/ADFSserverCS.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -420,8 +420,8 @@
           "envPrefix": {
             "value": "[parameters('envPrefix')]"
           },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
+          "artifactsLocation": {
+            "value": "[parameters('artifactsLocation')]"
           },
           "WAPPublicDNS": {
             "value": "[reference('WAPServer').outputs.wapfqdn.value]"
@@ -443,7 +443,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/WAPServerDSC.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/WAPServerDSC.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -459,8 +459,8 @@
           "envPrefix": {
             "value": "[parameters('envPrefix')]"
           },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
+          "artifactsLocation": {
+            "value": "[parameters('artifactsLocation')]"
           },
           "domainName": {
             "value": "[variables('domainName')]"
@@ -479,7 +479,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/WAPServerCS.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/Templates/NestedDeploy/WAPServerCS.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -495,8 +495,8 @@
           "envPrefix": {
             "value": "[parameters('envPrefix')]"
           },
-          "_artifactsLocation": {
-            "value": "[parameters('_artifactsLocation')]"
+          "artifactsLocation": {
+            "value": "[parameters('artifactsLocation')]"
           },
           "WAPPublicDNS": {
             "value": "[reference('WAPServer').outputs.wapfqdn.value]"
