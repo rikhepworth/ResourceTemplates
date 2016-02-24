@@ -308,8 +308,8 @@
           "domainName": {
             "value": "[variables('domainName')]"
           },
-          "vmName": {
-            "value": "[variables('vmConfiguration').dc.name]"
+          "vmConfiguration": {
+            "value": "[variables('vmConfiguration')]"
           }
 
         }
@@ -353,8 +353,8 @@
           "WebPublicDNS": {
             "value": "[variables('domainName')]"
           },
-          "vmName": {
-            "value": "[variables('vmConfiguration').dc.name]"
+          "vmConfiguration": {
+            "value": "[variables('vmConfiguration')]"
           }
 
         }
@@ -392,6 +392,9 @@
           },
           "vmName": {
             "value": "[variables('vmConfiguration').adfs.name]"
+          },
+          "vmDCName": {
+            "value": "[variables('vmConfiguration').dc.name]"
           }
         }
       }
@@ -431,7 +434,11 @@
           },
           "vmName": {
             "value": "[variables('vmConfiguration').adfs.name]"
+          },
+          "vmDCName": {
+            "value": "[variables('vmConfiguration').dc.name]"
           }
+
         }
       }
     },
@@ -503,7 +510,14 @@
           },
           "vmName": {
             "value": "[variables('vmConfiguration').wap.name]"
+          },
+          "vmDCName": {
+            "value": "[variables('vmConfiguration').dc.name]"
+          },
+          "vmADFSName": {
+            "value": "[variables('vmConfiguration').adfs.name]"
           }
+
         }
       }
     }
