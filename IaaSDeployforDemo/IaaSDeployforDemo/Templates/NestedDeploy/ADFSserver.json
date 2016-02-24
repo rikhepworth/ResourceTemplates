@@ -171,7 +171,7 @@
             },
             "protectedSettings": {
               "storageAccountName": "[parameters('StorageAccount').Name]",
-              "storageAccountKey": "[listkeys(variables('accountid'), '2015-05-01-preview').key1]",
+              "storageAccountKey": "[listkeys(variables('accountid'), '2015-06-15').key1]",
               "storageAccountEndPoint": "https://core.windows.net"
             }
           }
