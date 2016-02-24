@@ -309,7 +309,7 @@
             "value": "[variables('domainName')]"
           },
           "vmName": {
-            "value": "[variables('vmNames').dc]"
+            "value": "[variables('vmConfiguration').dc.name]"
           }
 
         }
@@ -354,7 +354,7 @@
             "value": "[variables('domainName')]"
           },
           "vmName": {
-            "value": "[variables('vmNames').dc]"
+            "value": "[variables('vmConfiguration').dc.name]"
           }
 
         }
@@ -391,7 +391,7 @@
             "value": "[variables('domainName')]"
           },
           "vmName": {
-            "value": "[variables('vmNames').adfs]"
+            "value": "[variables('vmConfiguration').adfs.name]"
           }
         }
       }
@@ -430,7 +430,7 @@
             "value": "[variables('domainName')]"
           },
           "vmName": {
-            "value": "[variables('vmNames').adfs]"
+            "value": "[variables('vmConfiguration').adfs.name]"
           }
         }
       }
@@ -466,7 +466,7 @@
             "value": "[variables('domainName')]"
           },
           "vmName": {
-            "value": "[variables('vmNames').wap]"
+            "value": "[variables('vmConfiguration').wap.name]"
           }
         }
       }
@@ -502,7 +502,7 @@
             "value": "[reference('WAPServer').outputs.wapfqdn.value]"
           },
           "vmName": {
-            "value": "[variables('vmNames').wap]"
+            "value": "[variables('vmConfiguration').wap.name]"
           }
         }
       }
