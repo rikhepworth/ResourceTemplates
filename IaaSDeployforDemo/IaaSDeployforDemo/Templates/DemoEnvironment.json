@@ -35,7 +35,7 @@
         },
       "_artifactsLocation": {
         "type": "string",
-        "defaultValue": "https://raw.githubusercontent.com/rikhepworth/ResourceTemplates/IaaS%20Deploy%20For%20Demo/",
+        "defaultValue": "https://raw.githubusercontent.com/rikhepworth/ResourceTemplates/IaaSDeployforDemo/IaaSDeployforDemo",
         "metadata": {
           "description": "Storage Account/GitHub base uri for required files"
         }
