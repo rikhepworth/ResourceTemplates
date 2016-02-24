@@ -53,9 +53,6 @@
         "_artifactsLocation": {
             "type": "string"
         },
-        "_artifactsLocationSasToken": {
-            "type": "securestring"
-        },
         "vmName": {
             "type": "string"
         },
@@ -228,7 +225,7 @@
             "properties": {
                 "mode": "Incremental",
               "templateLink": {
-                "uri": "[concat(parameters('_artifactsLocation'), 'Templates/NestedDeploy/SetStaticIPpip.json', parameters('_artifactsLocationSasToken'))]",
+                "uri": "[concat(parameters('_artifactsLocation'), '/Templates/NestedDeploy/SetStaticIPpip.json')]",
                 "contentVersion": "1.0.0.0"
               },
                 "parameters": {
