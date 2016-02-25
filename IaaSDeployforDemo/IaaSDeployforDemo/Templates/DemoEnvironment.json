@@ -308,10 +308,9 @@
           "domainName": {
             "value": "[variables('domainName')]"
           },
-          "vmConfiguration": {
-            "value": "[variables('vmConfiguration')]"
+          "vmName": {
+            "value": "[variables('vmConfiguration').dc.name]"
           }
-
         }
       }
     },
@@ -353,10 +352,9 @@
           "WebPublicDNS": {
             "value": "[variables('domainName')]"
           },
-          "vmConfiguration": {
-            "value": "[variables('vmConfiguration')]"
+          "vmName": {
+            "value": "[variables('vmConfiguration').dc.name]"
           }
-
         }
       }
     },
