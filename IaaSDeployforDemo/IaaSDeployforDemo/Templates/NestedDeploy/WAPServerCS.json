@@ -60,9 +60,9 @@
                 "typeHandlerVersion": "1.4",
                 "settings": {
                   "fileUris": [
-                    "[concat(parameters('artifactsLocation'),'/CustomScript/WAPserver.ps1', parameters('artifactsLocationSasToken'))]",
-                    "[concat(parameters('artifactsLocation'),'/CustomScript/PSPKI.zip', parameters('artifactsLocationSasToken'))]",
-                    "[concat(parameters('artifactsLocation'),'/CustomScript/DeployFunctions.ps1', parameters('artifactsLocationSasToken'))]"
+                    "[concat(parameters('artifactsLocation'),'/CustomScript/WAPserver.ps1')]",
+                    "[concat(parameters('artifactsLocation'),'/CustomScript/PSPKI.zip')]",
+                    "[concat(parameters('artifactsLocation'),'/CustomScript/DeployFunctions.ps1')]"
                   ],
                     "commandToExecute": "[concat('powershell.exe -file WAPserver.ps1',' -vmAdminUsername ',parameters('adminUsername'),' -vmAdminPassword ',parameters('adminPassword'),' -fsServiceName ',parameters('WAPPublicDNS'),' -adfsServerName ',concat(parameters('envPrefix'),parameters('vmADFSName')),' -vmDCname ',concat(parameters('envPrefix'),parameters('vmDCName')), ' -resourceLocation \"', parameters('VirtualNetwork').Location,'\"')]"
                 }
