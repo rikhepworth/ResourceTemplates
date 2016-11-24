@@ -14,7 +14,9 @@
       "defaultValue": "North Europe",
       "allowedValues": [
         "North Europe",
-        "West Europe"
+        "West Europe",
+        "UK West",
+        "UK South"
       ],
       "metadata": {
         "description": "Location for all resources"
