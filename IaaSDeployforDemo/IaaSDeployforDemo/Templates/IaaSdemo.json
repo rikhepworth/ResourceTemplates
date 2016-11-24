@@ -4,7 +4,7 @@
   "parameters": {
     "labName": {
       "type": "string",
-      "defaultValue": "FabrikamDemoLab"
+      "defaultValue": "TestLab"
     },
     "userObjectId": {
       "type": "string",
@@ -31,11 +31,11 @@
     },
     "repoInternalName": {
       "type": "string",
-      "defaultValue": "azuretemplates"
+      "defaultValue": "privaterepo712"
     },
     "armTemplateName": {
       "type": "string",
-      "defaultValue": "DC+ADFS+WAP"
+      "defaultValue": "DemoEnvironment"
     }
   },
   "variables": {
