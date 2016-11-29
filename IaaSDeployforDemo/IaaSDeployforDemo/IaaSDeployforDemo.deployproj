@@ -123,6 +123,7 @@
     <None Include="DSC\xStorage\2.1.0.0\Resources\xDscResourceDesigner_CreateScript.ps1" />
     <None Include="DSC\xStorage\2.1.0.0\xStorage.psd1" />
     <None Include="Templates\azuredeploy.json" />
+    <None Include="Templates\metadata.json" />
     <None Include="Templates\NestedDeploy\ADFSserver.json" />
     <None Include="Templates\NestedDeploy\ADFSserverCS.json" />
     <None Include="Templates\NestedDeploy\ADFSserverDSC.json" />
