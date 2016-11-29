@@ -1,7 +1,7 @@
 ﻿{
   "itemDisplayName": "Domain with DC, ADFS and WAP",
   "description": "Environment with Domain Controller, ADFS and WAP on Server 2012 R2",
-  "summary": "T3 servers on a single subnet. WAP has PIP and acts as jumpbox. Installs Certificate services, ADFS and WAP on a new Windows AD Domain",
+  "summary": "3 servers on a single subnet. WAP has PIP and acts as jumpbox. Installs Certificate services, ADFS and WAP on a new Windows AD Domain",
   "githubUsername": "rikhepworth",
   "dateUpdated": "2016-11-29"
 }
