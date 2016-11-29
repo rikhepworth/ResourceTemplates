@@ -38,7 +38,7 @@
       <Visible>False</Visible>
     </None>
     <Content Include="Scripts\Deploy-AzureResourceGroup.ps1" />
-    <Content Include="Templates\DemoEnvironment.json" />
+    <Content Include="Templates\azuredeploy.json" />
     <None Include="DSC\dsc.zip" />
     <None Include="DSC\DSCvmConfigs.ps1" />
     <None Include="DSC\xActiveDirectory\2.6.0.0\appveyor.yml" />
@@ -122,7 +122,7 @@
     <None Include="DSC\xStorage\2.1.0.0\Resources\ExampleScript.ps1" />
     <None Include="DSC\xStorage\2.1.0.0\Resources\xDscResourceDesigner_CreateScript.ps1" />
     <None Include="DSC\xStorage\2.1.0.0\xStorage.psd1" />
-    <None Include="Templates\azuredeploy.json" />
+    <None Include="Templates\labdeploy.json" />
     <None Include="Templates\metadata.json" />
     <None Include="Templates\NestedDeploy\ADFSserver.json" />
     <None Include="Templates\NestedDeploy\ADFSserverCS.json" />

@@ -1,0 +1,87 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "labName": {
+      "type": "string",
+      "defaultValue": "TestLab"
+    },
+    "userObjectId": {
+      "type": "string",
+      "defaultValue": "@me"
+    },
+    "environmentName": {
+      "type": "string",
+      "defaultValue": "env001"
+    },
+    "armParaName": {
+      "type": "string",
+      "defaultValue": "rik"
+    },
+    "armParaPassword": {
+      "type": "securestring"
+    },
+    "armParaEnvPrefix": {
+      "type": "string",
+      "defaultValue": "rik01"
+    },
+    "armParaEnvLocation": {
+      "type": "string",
+      "defaultValue": "North Europe"
+    },
+    "repoInternalName": {
+      "type": "string",
+      "defaultValue": "privaterepo712"
+    },
+    "armTemplateName": {
+      "type": "string",
+      "defaultValue": "DemoEnvironment"
+    }
+  },
+  "variables": {
+    "envName": "[concat(parameters('labName'), '/', parameters('userObjectId'), '/', parameters('environmentName'))]",
+    "templateId": "[resourceId('Microsoft.DevTestLab/labs/artifactSources/armTemplates', parameters('labName'), parameters('repoInternalName'), parameters('armTemplateName'))]",
+    "environmentId": "[resourceId ('Microsoft.DevTestLab/labs/environment', parameters('labName'), parameters('environmentName'))]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2016-05-15",
+      "type": "Microsoft.DevTestLab/labs/users/environments",
+      "name": "[variables('envName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "deploymentProperties": {
+          "parameters": [
+            {
+              "name": "adminUsername",
+              "value": "[parameters('armParaName')]"
+            },
+            {
+              "name": "adminPassword",
+              "value": "[parameters('armParaPassword')]"
+            },
+            {
+              "name": "envPrefix",
+              "value": "[parameters('armParaEnvPrefix')]"
+            },
+            {
+              "name": "envLocation",
+              "value": "[parameters('armParaEnvLocation')]"
+            },
+            {
+              "name": "artifactsLocation",
+              "value": "https://raw.githubusercontent.com/rikhepworth/ResourceTemplates/master/IaaSDeployforDemo/IaaSDeployforDemo"
+            }
+          ],
+          "armTemplateId": "[variables('templateId')]"
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "environmentId": {
+      "type": "string",
+      "value": "[variables('environmentId')]"
+    }
+  }
+}
