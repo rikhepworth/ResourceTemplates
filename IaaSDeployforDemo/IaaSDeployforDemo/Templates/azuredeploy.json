@@ -86,7 +86,7 @@
       "name": "NetworkAndStorage",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "dependsOn": [ ],
+      "dependsOn": [],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -108,7 +108,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "NetworkAndStorage"
+        "Microsoft.Resources/deployments/NetworkAndStorage"
       ],
       "properties": {
         "mode": "Incremental",
@@ -158,9 +158,9 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "NetworkAndStorage",
-        "DomainController",
-        "DomainControllerDSC"
+        "Microsoft.Resources/deployments/NetworkAndStorage",
+        "Microsoft.Resources/deployments/DomainController",
+        "Microsoft.Resources/deployments/DomainControllerDSC"
       ],
       "properties": {
         "mode": "Incremental",
@@ -183,7 +183,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "NetworkAndStorage"
+        "Microsoft.Resources/deployments/NetworkAndStorage"
       ],
       "properties": {
         "mode": "Incremental",
@@ -233,7 +233,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "NetworkAndStorage"
+        "Microsoft.Resources/deployments/NetworkAndStorage"
       ],
       "properties": {
         "mode": "Incremental",
@@ -283,7 +283,7 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "DomainController"
+        "Microsoft.Resources/deployments/DomainController"
       ],
       "properties": {
         "mode": "Incremental",
@@ -321,10 +321,10 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "DomainController",
-        "DomainControllerDSC",
-        "ADFSserverDSC",
-        "WAPServerDSC"
+        "Microsoft.Resources/deployments/DomainController",
+        "Microsoft.Resources/deployments/DomainControllerDSC",
+        "Microsoft.Resources/deployments/ADFSserverDSC",
+        "Microsoft.Resources/deployments/WAPServerDSC"
       ],
       "properties": {
         "mode": "Incremental",
@@ -364,7 +364,11 @@
       "name": "ADFSserverDSC",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "dependsOn": [ "DomainControllerDSC", "ADFSserver", "UpdateVNetDNS" ],
+      "dependsOn": [
+        "Microsoft.Resources/deployments/DomainControllerDSC",
+        "Microsoft.Resources/deployments/ADFSserver",
+        "Microsoft.Resources/deployments/UpdateVNetDNS"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -403,7 +407,9 @@
       "name": "ADFSserverCS",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "dependsOn": [ "DomainControllerCS" ],
+      "dependsOn": [
+        "Microsoft.Resources/deployments/DomainControllerCS"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -446,7 +452,11 @@
       "name": "WAPServerDSC",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "dependsOn": [ "DomainControllerDSC", "WAPServer", "UpdateVNetDNS" ],
+      "dependsOn": [
+        "Microsoft.Resources/deployments/DomainControllerDSC",
+        "Microsoft.Resources/deployments/WAPServer",
+        "Microsoft.Resources/deployments/UpdateVNetDNS"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -482,7 +492,9 @@
       "name": "WAPServerCS",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "dependsOn": [ "ADFSserverCS" ],
+      "dependsOn": [
+        "Microsoft.Resources/deployments/ADFSserverCS"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
