@@ -2,6 +2,12 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "ApiVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "Azure API version for deployment"
+      }
+    },
     "VirtualNetwork": {
       "type": "object",
       "metadata": {
@@ -20,10 +26,10 @@
         "description": "object containing storage account params"
       }
     },
-    "StorageAccountId": {
+    "StorageEndpoint": {
       "type": "string",
       "metadata": {
-        "description": "ID of existing storage account"
+        "description": "Endpoint URL for storage account"
       }
     },
     "adminUsername": {
@@ -57,12 +63,11 @@
       "type": "string"
     },
     "vmSize": {
-       "type": "string"
+      "type": "string"
     }
   },
   "variables": {
     "domainName": "[concat(parameters('envPrefix'), '.local')]",
-    "StorageBlobUrl": "[concat('https://', parameters('StorageAccount').Name, '.', '.blob.core.windows.net')]",
     "accountid": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/',resourceGroup().name, '/providers/','Microsoft.Storage/storageAccounts/', parameters('StorageAccount').Name)]",
     "wadlogs": "<WadCfg> <DiagnosticMonitorConfiguration overallQuotaInMB=\"4096\" xmlns=\"http://schemas.microsoft.com/ServiceHosting/2010/10/DiagnosticsConfiguration\"> <DiagnosticInfrastructureLogs scheduledTransferLogLevelFilter=\"Error\"/> <WindowsEventLog scheduledTransferPeriod=\"PT1M\" > <DataSource name=\"Application!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"Security!*[System[(Level = 1 or Level = 2)]]\" /> <DataSource name=\"System!*[System[(Level = 1 or Level = 2)]]\" /></WindowsEventLog>",
     "wadperfcounters1": "<PerformanceCounters scheduledTransferPeriod=\"PT1M\"><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Processor Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU utilization\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% Privileged Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU privileged time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor(_Total)\\% User Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"CPU user time\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Processor Information(_Total)\\Processor Frequency\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"CPU frequency\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\System\\Processes\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Processes\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Thread Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Threads\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Process(_Total)\\Handle Count\" sampleRate=\"PT15S\" unit=\"Count\"><annotation displayName=\"Handles\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\% Committed Bytes In Use\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Memory usage\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Available Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory available\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Committed Bytes\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory committed\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\Memory\\Commit Limit\" sampleRate=\"PT15S\" unit=\"Bytes\"><annotation displayName=\"Memory commit limit\" locale=\"en-us\"/></PerformanceCounterConfiguration><PerformanceCounterConfiguration counterSpecifier=\"\\PhysicalDisk(_Total)\\% Disk Time\" sampleRate=\"PT15S\" unit=\"Percent\"><annotation displayName=\"Disk active time\" locale=\"en-us\"/></PerformanceCounterConfiguration>",
@@ -76,7 +81,7 @@
       "name": "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[parameters('ApiVersion')]",
       "dependsOn": [
       ],
       "tags": {
@@ -100,7 +105,7 @@
       "name": "[concat(parameters('envPrefix'),parameters('vmName'))]",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "2015-06-15",
+      "apiVersion": "[parameters('ApiVersion')]",
       "dependsOn": [
         "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]"
       ],
@@ -126,7 +131,7 @@
           "osDisk": {
             "name": "[concat(parameters('envPrefix'),parameters('vmName'), '-os-disk')]",
             "vhd": {
-              "uri": "[concat(variables('StorageBlobUrl'), '/vhds/', parameters('envPrefix'),parameters('vmName'), 'os.vhd')]"
+              "uri": "[concat(parameters('StorageEndpoint'), '/vhds/', parameters('envPrefix'),parameters('vmName'), 'os.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -142,18 +147,18 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": "true",
-            "storageUri": "[variables('StorageBlobUrl')]"
+            "storageUri": "[parameters('StorageEndpoint')]"
           }
         }
       },
       "resources": [
-        
+
       ]
     },
     {
       "name": "[concat('Set',parameters('envPrefix'),parameters('vmName'),'SetStaticIP')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[parameters('ApiVersion')]",
       "dependsOn": [
         "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
         "[concat(parameters('envPrefix'),parameters('vmName'))]"
@@ -165,6 +170,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[parameters('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[parameters('VirtualNetwork')]"
           },

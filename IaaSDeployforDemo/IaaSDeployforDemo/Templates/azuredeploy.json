@@ -11,13 +11,7 @@
     },
     "envLocation": {
       "type": "string",
-      "defaultValue": "North Europe",
-      "allowedValues": [
-        "North Europe",
-        "West Europe",
-        "UK West",
-        "UK South"
-      ],
+      "defaultValue": "[resourceGroup().location]",
       "metadata": {
         "description": "Location for all resources"
       }
@@ -44,11 +38,11 @@
     }
   },
   "variables": {
+    "ApiVersion": "2015-06-15",
     "StorageAccount": {
       "Name": "[concat(parameters('envPrefix'),'storage')]",
       "Type": "Standard_LRS",
       "Location": "[parameters('envLocation')]",
-      "EndPoint": "blob.core.windows.net"
     },
     "VirtualNetwork": {
       "Name": "[concat(parameters('envPrefix'), 'network')]",
@@ -85,7 +79,7 @@
     {
       "name": "NetworkAndStorage",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [],
       "properties": {
         "mode": "Incremental",
@@ -94,6 +88,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -106,7 +103,7 @@
     {
       "name": "DomainController",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/NetworkAndStorage"
       ],
@@ -117,6 +114,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -125,6 +125,9 @@
           },
           "StorageAccount": {
             "value": "[variables('StorageAccount')]"
+          },
+          "StorageEndpoint": {
+            "value": "[reference('NetworkAndStorage').outputs.storageEndpoint.value]"
           },
           "StorageAccountId": {
             "value": "[reference('NetworkAndStorage').outputs.StorageAccountId.value]"
@@ -156,7 +159,7 @@
     {
       "name": "UpdateVNetDNS",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/NetworkAndStorage",
         "Microsoft.Resources/deployments/DomainController",
@@ -169,6 +172,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -181,7 +187,7 @@
     {
       "name": "ADFSserver",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/NetworkAndStorage"
       ],
@@ -192,6 +198,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -201,8 +210,8 @@
           "StorageAccount": {
             "value": "[variables('StorageAccount')]"
           },
-          "StorageAccountId": {
-            "value": "[reference('NetworkAndStorage').outputs.StorageAccountId.value]"
+          "StorageEndpoint": {
+            "value": "[reference('NetworkAndStorage').outputs.storageEndpoint.value]"
           },
           "AdminUsername": {
             "value": "[parameters('adminUsername')]"
@@ -231,7 +240,7 @@
     {
       "name": "WAPServer",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/NetworkAndStorage"
       ],
@@ -242,6 +251,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -251,8 +263,8 @@
           "StorageAccount": {
             "value": "[variables('StorageAccount')]"
           },
-          "StorageAccountId": {
-            "value": "[reference('NetworkAndStorage').outputs.StorageAccountId.value]"
+          "StorageEndpoint": {
+            "value": "[reference('NetworkAndStorage').outputs.storageEndpoint.value]"
           },
           "AdminUsername": {
             "value": "[parameters('adminUsername')]"
@@ -281,7 +293,7 @@
     {
       "name": "DomainControllerDSC",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainController"
       ],
@@ -292,6 +304,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -319,7 +334,7 @@
     {
       "name": "DomainControllerCS",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainController",
         "Microsoft.Resources/deployments/DomainControllerDSC",
@@ -333,6 +348,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -363,7 +381,7 @@
     {
       "name": "ADFSserverDSC",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainControllerDSC",
         "Microsoft.Resources/deployments/ADFSserver",
@@ -376,6 +394,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -406,7 +427,7 @@
     {
       "name": "ADFSserverCS",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainControllerCS"
       ],
@@ -417,6 +438,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -451,7 +475,7 @@
     {
       "name": "WAPServerDSC",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainControllerDSC",
         "Microsoft.Resources/deployments/WAPServer",
@@ -464,6 +488,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },
@@ -491,7 +518,7 @@
     {
       "name": "WAPServerCS",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "[variables('ApiVersion')]",
       "dependsOn": [
         "Microsoft.Resources/deployments/ADFSserverCS"
       ],
@@ -502,6 +529,9 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
+          "ApiVersion": {
+            "value": "[variables('ApiVersion')]"
+          },
           "VirtualNetwork": {
             "value": "[variables('VirtualNetwork')]"
           },

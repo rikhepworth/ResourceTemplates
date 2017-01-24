@@ -2,6 +2,12 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "ApiVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "Azure API version for deployment"
+      }
+    },
     "VirtualNetwork": {
       "type": "object",
       "metadata": {
@@ -19,8 +25,8 @@
       "name": "[parameters('VirtualNetwork').Name]",
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "2015-05-01-preview",
-      "dependsOn": [ ],
+      "apiVersion": "[parameters('ApiVersion')]",
+      "dependsOn": [],
       "tags": {
         "displayName": "VirtualNetwork"
       },
@@ -32,7 +38,7 @@
         },
         "dhcpOptions": {
           "dnsServers": [
-          "[parameters('DNSaddress')]"
+            "[parameters('DNSaddress')]"
           ]
         },
         "subnets": [

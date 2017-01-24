@@ -1,77 +1,83 @@
 ﻿{
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "VirtualNetwork": {
-            "type": "object",
-            "metadata": {
-                "description": "object containing virtual network params"
-            }
-        },
-        "adminUsername": {
-            "type": "string",
-            "metadata": {
-                "description": "Admin username for environment"
-            }
-        },
-        "adminPassword": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Admin password for environment"
-            }
-        },
-        "envPrefix": {
-            "type": "string",
-            "metadata": {
-                "description": "Common prefix for all resource naming"
-            }
-        },
-        "artifactsLocation": {
-            "type": "string"
-        },
-        "domainName": {
-            "type": "string"
-        },
-        "vmName": {
-            "type": "string"
-        }
+  "parameters": {
+    "ApiVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "Azure API version for deployment"
+      }
     },
+    "VirtualNetwork": {
+      "type": "object",
+      "metadata": {
+        "description": "object containing virtual network params"
+      }
+    },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Admin username for environment"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Admin password for environment"
+      }
+    },
+    "envPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "Common prefix for all resource naming"
+      }
+    },
+    "artifactsLocation": {
+      "type": "string"
+    },
+    "domainName": {
+      "type": "string"
+    },
+    "vmName": {
+      "type": "string"
+    }
+  },
     "variables": {
     },
     "resources": [
-        {
-            "name": "[concat(parameters('envPrefix'),parameters('vmName'),'/',parameters('envPrefix'),parameters('vmName'),'dsc')]",
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "location": "[parameters('VirtualNetwork').Location]",
-            "apiVersion": "2015-05-01-preview",
-            "dependsOn": [
-            ],
-            "tags": {
-                "displayName": "DomainController"
-            },
+      {
+        "name": "[concat(parameters('envPrefix'),parameters('vmName'),'/',parameters('envPrefix'),parameters('vmName'),'dsc')]",
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "location": "[parameters('VirtualNetwork').Location]",
+        "apiVersion": "[parameters('ApiVersion')]",
+        "dependsOn": [
+        ],
+        "tags": {
+          "displayName": "DomainController"
+        },
+        "properties": {
+          "publisher": "Microsoft.Powershell",
+          "type": "DSC",
+          "typeHandlerVersion": "2.1",
+          "autoUpgradeMinorVersion": true,
+          "settings": {
+            "modulesUrl": "[concat(parameters('artifactsLocation'), '/DSC/', 'dsc.zip')]",
+            "configurationFunction": "DSCvmConfigs.ps1\\DomainController",
             "properties": {
-                "publisher": "Microsoft.Powershell",
-                "type": "DSC",
-                "typeHandlerVersion": "2.1",
-                "autoUpgradeMinorVersion": true,
-                "settings": {
-                    "modulesUrl": "[concat(parameters('artifactsLocation'), '/DSC/', 'dsc.zip')]",
-                    "configurationFunction": "DSCvmConfigs.ps1\\DomainController",
-                    "properties": {
-                        "domainName": "[parameters('domainName')]",
-                        "adminCreds": {
-                            "userName": "[parameters('adminUsername')]",
-                            "password": "PrivateSettingsRef:adminPassword"
-                        }
-                    }
-                },
-                "protectedSettings": {
-                    "Items": {
-                        "adminPassword": "[parameters('adminPassword')]"
-                    }
-                }
+              "domainName": "[parameters('domainName')]",
+              "adminCreds": {
+                "userName": "[parameters('adminUsername')]",
+                "password": "PrivateSettingsRef:adminPassword"
+              }
             }
+          },
+          "protectedSettings": {
+            "Items": {
+              "adminPassword": "[parameters('adminPassword')]"
+            }
+          }
         }
+      }
     ],
     "outputs": {
     }

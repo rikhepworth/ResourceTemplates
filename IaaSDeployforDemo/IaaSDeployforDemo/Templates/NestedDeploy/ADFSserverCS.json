@@ -1,73 +1,79 @@
 ﻿{
-    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "VirtualNetwork": {
-            "type": "object",
-            "metadata": {
-                "description": "object containing virtual network params"
-            }
-        },
-        "adminUsername": {
-            "type": "string",
-            "metadata": {
-                "description": "Admin username for environment"
-            }
-        },
-        "adminPassword": {
-            "type": "securestring",
-            "metadata": {
-                "description": "Admin password for environment"
-            }
-        },
-        "envPrefix": {
-            "type": "string",
-            "metadata": {
-                "description": "Common prefix for all resource naming"
-            }
-        },
-        "artifactsLocation": {
-            "type": "string"
-        },
-        "WAPPublicDNS": {
-            "type": "string"
-        },
-        "WebPublicDNS": {
-            "type": "string"
-        },
-        "vmName": {
-            "type": "string"
-        },
-        "vmDCName": {
-            "type": "string"
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "ApiVersion": {
+      "type": "string",
+      "metadata": {
+        "description": "Azure API version for deployment"
+      }
+    },
+    "VirtualNetwork": {
+      "type": "object",
+      "metadata": {
+        "description": "object containing virtual network params"
+      }
+    },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "Admin username for environment"
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "Admin password for environment"
+      }
+    },
+    "envPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "Common prefix for all resource naming"
+      }
+    },
+    "artifactsLocation": {
+      "type": "string"
+    },
+    "WAPPublicDNS": {
+      "type": "string"
+    },
+    "WebPublicDNS": {
+      "type": "string"
+    },
+    "vmName": {
+      "type": "string"
+    },
+    "vmDCName": {
+      "type": "string"
 
-        }
-    },
-    "variables": {
-    },
-    "resources": [
-        {
-            "name": "[concat(parameters('envPrefix'),parameters('vmName'),'/',parameters('envPrefix'),parameters('vmName'),'cs')]",
-            "type": "Microsoft.Compute/virtualMachines/extensions",
-            "apiVersion": "2015-05-01-preview",
-            "location": "[parameters('VirtualNetwork').Location]",
-            "dependsOn": [
-            ],
-            "properties": {
-                "publisher": "Microsoft.Compute",
-                "type": "CustomScriptExtension",
-                "typeHandlerVersion": "1.4",
-                "settings": {
-                  "fileUris": [
-                    "[concat(parameters('artifactsLocation'),'/CustomScript/AdfsServer.ps1')]",
-                    "[concat(parameters('artifactsLocation'),'/CustomScript/PSPKI.zip')]",
-                    "[concat(parameters('artifactsLocation'),'/CustomScript/DeployFunctions.ps1')]"
-                  ],
-                    "commandToExecute": "[concat('powershell.exe -file AdfsServer.ps1',' -vmAdminUsername ',parameters('adminUsername'),' -vmAdminPassword ',parameters('adminPassword'),' -fsServiceName ',parameters('WAPPublicDNS'),' -vmDCname ',concat(parameters('envPrefix'),parameters('vmDCName')), ' -resourceLocation \"', parameters('VirtualNetwork').Location,'\"')]"
-                }
-            }
-        }
-    ],
-    "outputs": {
     }
+  },
+  "variables": {
+  },
+  "resources": [
+    {
+      "name": "[concat(parameters('envPrefix'),parameters('vmName'),'/',parameters('envPrefix'),parameters('vmName'),'cs')]",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "apiVersion": "[parameters('ApiVersion')]",
+      "location": "[parameters('VirtualNetwork').Location]",
+      "dependsOn": [
+      ],
+      "properties": {
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "typeHandlerVersion": "1.4",
+        "settings": {
+          "fileUris": [
+            "[concat(parameters('artifactsLocation'),'/CustomScript/AdfsServer.ps1')]",
+            "[concat(parameters('artifactsLocation'),'/CustomScript/PSPKI.zip')]",
+            "[concat(parameters('artifactsLocation'),'/CustomScript/DeployFunctions.ps1')]"
+          ],
+          "commandToExecute": "[concat('powershell.exe -file AdfsServer.ps1',' -vmAdminUsername ',parameters('adminUsername'),' -vmAdminPassword ',parameters('adminPassword'),' -fsServiceName ',parameters('WAPPublicDNS'),' -vmDCname ',concat(parameters('envPrefix'),parameters('vmDCName')), ' -resourceLocation \"', parameters('VirtualNetwork').Location,'\"')]"
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
 }
