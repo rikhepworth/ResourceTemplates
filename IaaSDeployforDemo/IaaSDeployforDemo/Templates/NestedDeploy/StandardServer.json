@@ -105,7 +105,7 @@
       "name": "[concat(parameters('envPrefix'),parameters('vmName'))]",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "[parameters('ApiVersion').Default]",
+      "apiVersion": "[parameters('ApiVersion').VirtualMachine]",
       "dependsOn": [
         "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]"
       ],

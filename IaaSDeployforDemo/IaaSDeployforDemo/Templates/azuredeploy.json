@@ -41,7 +41,8 @@
     "ApiVersion": {
       "Storage": "2016-01-01",
       "Network": "2015-06-15",
-      "Default": "2015-06-15"
+      "VirtualMachine": "2015-06-15",
+      "Default": "2016-06-01"
     },
     "StorageAccount": {
       "Name": "[concat(parameters('envPrefix'),'storage')]",
@@ -83,7 +84,7 @@
     {
       "name": "NetworkAndStorage",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [],
       "properties": {
         "mode": "Incremental",
@@ -132,9 +133,6 @@
           },
           "StorageEndpoint": {
             "value": "[reference('NetworkAndStorage').outputs.storageEndpoint.value]"
-          },
-          "StorageAccountId": {
-            "value": "[reference('NetworkAndStorage').outputs.StorageAccountId.value]"
           },
           "AdminUsername": {
             "value": "[parameters('adminUsername')]"

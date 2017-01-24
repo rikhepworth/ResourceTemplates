@@ -55,7 +55,7 @@
     {
       "name": "[concat(parameters('envPrefix'),parameters('vmName'),'/',parameters('envPrefix'),parameters('vmName'),'cs')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "apiVersion": "[parameters('ApiVersion').Default]",
+      "apiVersion": "[parameters('ApiVersion').VirtualMachine]",
       "location": "[parameters('VirtualNetwork').Location]",
       "dependsOn": [
       ],
