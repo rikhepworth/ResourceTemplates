@@ -185,7 +185,6 @@
       "apiVersion": "[parameters('ApiVersion').Default]",
       "dependsOn": [
         "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
-        "[concat(parameters('envPrefix'),parameters('vmName'),'nsg')]",
         "[concat(parameters('envPrefix'),parameters('vmName'))]"
       ],
       "properties": {
