@@ -161,20 +161,20 @@ configuration ADFSserver
             Ensure = "Present"
 
         } 
-		xWaitForADDomain DscForestWait 
-        { 
-            DomainName = $DomainName 
-            DomainUserCredential= $Admincreds
-            RetryCount = $RetryCount 
-            RetryIntervalSec = $RetryIntervalSec 
-            DependsOn = "[WindowsFeature]ADPS"      
-        }
+#		xWaitForADDomain DscForestWait 
+#        { 
+#            DomainName = $DomainName 
+#            DomainUserCredential= $Admincreds
+#            RetryCount = $RetryCount 
+#            RetryIntervalSec = $RetryIntervalSec 
+#            DependsOn = "[WindowsFeature]ADPS"      
+#        }
 		xComputer DomainJoin
         {
             Name = $env:COMPUTERNAME
             DomainName = $DomainName
             Credential = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($Admincreds.UserName)", $Admincreds.Password)
-			DependsOn = "[xWaitForADDomain]DscForestWait"
+#			DependsOn = "[xWaitForA#DDomain]DscForestWait"
         }
 
 		File SrcCopy
@@ -233,20 +233,20 @@ configuration WAPserver
             Name = "RSAT-AD-PowerShell"
             Ensure = "Present"
         } 
-		xWaitForADDomain DscForestWait 
-        { 
-            DomainName = $DomainName 
-            DomainUserCredential= $Admincreds
-            RetryCount = $RetryCount 
-            RetryIntervalSec = $RetryIntervalSec 
-            DependsOn = "[WindowsFeature]ADPS"      
-        }
+#		xWaitForADDomain DscForestWait 
+#        { 
+#            DomainName = $DomainName 
+#            DomainUserCredential= $Admincreds
+#            RetryCount = $RetryCount 
+#            RetryIntervalSec = $RetryIntervalSec 
+#            DependsOn = "[WindowsFeature]ADPS"      
+#        }
 		xComputer DomainJoin
         {
             Name = $env:COMPUTERNAME
             DomainName = $DomainName
             Credential = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($Admincreds.UserName)", $Admincreds.Password)
-			DependsOn = "[xWaitForADDomain]DscForestWait"
+#			DependsOn = "[xWaitForADDomain]DscForestWait"
         }
 
         LocalConfigurationManager 
