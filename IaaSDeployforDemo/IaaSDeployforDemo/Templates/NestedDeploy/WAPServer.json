@@ -259,15 +259,6 @@
     "ipAddress": {
       "value": "[reference(concat(parameters('envPrefix'),parameters('vmName'),'nic')).ipConfigurations[0].properties.privateIPAddress]",
       "type": "string"
-    },
-    "pipAddress": {
-      "value": "[reference(concat(parameters('envPrefix'),parameters('vmName'),'pip')).ipAddress]",
-      "type": "string"
-    },
-    "wapfqdn": {
-      "value": "[reference(concat(parameters('envPrefix'),parameters('vmName'),'pip')).dnsSettings.fqdn]",
-      "type": "string"
     }
-
   }
 }
