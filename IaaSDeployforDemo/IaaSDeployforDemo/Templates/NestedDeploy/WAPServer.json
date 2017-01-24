@@ -125,50 +125,12 @@
       }
     },
     {
-      "name": "[concat(parameters('envPrefix'),parameters('vmName'),'nsg')]",
-      "type": "Microsoft.Network/networkSecurityGroups",
-      "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "[parameters('ApiVersion').Network]",
-      "dependsOn": [
-        "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]"
-      ],
-
-      "tags": {
-        "displayName": "WAPserverNSG"
-      },
-
-      "properties": {
-        "securityRules": [
-          {
-            "name": "default-allow-rdp",
-            "properties": {
-              "protocol": "Tcp",
-              "sourcePortRange": "*",
-              "destinationPortRange": "3389",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*",
-              "access": "Allow",
-              "priority": 1000,
-              "direction": "Inbound"
-            }
-          }
-        ],
-        "subnets": [
-          {
-            "id": "[concat(parameters('VirtualNetworkId'),'/subnets/',parameters('VirtualNetwork').Subnet1Name)]"
-          }
-        ]
-
-      }
-    },
-    {
       "name": "[concat(parameters('envPrefix'),parameters('vmName'))]",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[parameters('VirtualNetwork').Location]",
       "apiVersion": "[parameters('ApiVersion').VirtualMachine]",
       "dependsOn": [
-        "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
-        "[concat(parameters('envPrefix'),parameters('vmName'),'nsg')]"
+        "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]"
       ],
       "tags": {
         "displayName": "WAPserver"
