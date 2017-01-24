@@ -159,7 +159,7 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": "true",
-            "storageUri": "[parameters('StorageEndpoint')"
+            "storageUri": "[parameters('StorageEndpoint')]"
           }
         }
       },
