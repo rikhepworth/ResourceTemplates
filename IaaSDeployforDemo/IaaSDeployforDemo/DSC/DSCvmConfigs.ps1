@@ -41,17 +41,17 @@ configuration DomainController
             InterfaceAlias = $InteraceAlias
             AddressFamily  = 'IPv4'
         }
-        xWaitforDisk Disk2
-        {
-             DiskNumber = 2
-             RetryIntervalSec =$RetryIntervalSec
-             RetryCount = $RetryCount
-        }
-        xDisk ADDataDisk
-        {
-            DiskNumber = 2
-            DriveLetter = "F"
-        }
+#        xWaitforDisk Disk2
+#        {
+#             DiskNumber = 2
+#             RetryIntervalSec =$RetryIntervalSec
+#             RetryCount = $RetryCount
+#        }
+#        xDisk ADDataDisk
+#        {
+#            DiskNumber = 2
+#            DriveLetter = "F"
+#        }
         WindowsFeature ADDSInstall 
         { 
             Ensure = "Present" 
@@ -62,9 +62,9 @@ configuration DomainController
             DomainName = $DomainName
             DomainAdministratorCredential = $DomainCreds
             SafemodeAdministratorPassword = $DomainCreds
-            DatabasePath = "F:\NTDS"
-            LogPath = "F:\NTDS"
-            SysvolPath = "F:\SYSVOL"
+            DatabasePath = "C:\NTDS"
+            LogPath = "C:\NTDS"
+            SysvolPath = "C:\SYSVOL"
         }
         WindowsFeature ADCS-Cert-Authority
         {
