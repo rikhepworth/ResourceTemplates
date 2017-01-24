@@ -73,7 +73,7 @@
       "type": "string"
     },
     "storageEndpoint": {
-      "value": "[reference(resourceId('Microsoft.Storage/storageAccounts',parameters('StorageAccount').Name),parameters('ApiVersion')).primaryEndpoints.blob]",
+      "value": "[reference(resourceId('Microsoft.Storage/storageAccounts',parameters('StorageAccount').Name),parameters('ApiVersion').Storage).primaryEndpoints.blob]",
       "type": "string"
     }
   }
