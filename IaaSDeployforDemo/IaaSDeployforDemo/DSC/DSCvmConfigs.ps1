@@ -110,7 +110,7 @@ configuration DomainController
         xADCSWebEnrollment CertSrv
         {
             Ensure = 'Present'
-            Name = 'CertSrv'
+            IsSingleInstance = 'Yes'
             Credential = $DomainCreds
             DependsOn = '[WindowsFeature]ADCS-Web-Enrollment','[xADCSCertificationAuthority]ADCS'
         } 
