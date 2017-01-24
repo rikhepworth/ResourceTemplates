@@ -31,18 +31,22 @@
     },
     "artifactsLocation": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/rikhepworth/ResourceTemplates/master/IaaSDeployforDemo/IaaSDeployforDemo",
+      "defaultValue": "https://raw.githubusercontent.com/rikhepworth/ResourceTemplates/AzureStack/IaaSDeployforDemo/IaaSDeployforDemo",
       "metadata": {
         "description": "Storage Account/GitHub base uri for required files"
       }
     }
   },
   "variables": {
-    "ApiVersion": "2015-06-15",
+    "ApiVersion": {
+      "Storage": "2016-01-01",
+      "Network": "2015-06-15",
+      "Default": "2015-06-15"
+    },
     "StorageAccount": {
       "Name": "[concat(parameters('envPrefix'),'storage')]",
       "Type": "Standard_LRS",
-      "Location": "[parameters('envLocation')]",
+      "Location": "[parameters('envLocation')]"
     },
     "VirtualNetwork": {
       "Name": "[concat(parameters('envPrefix'), 'network')]",
@@ -103,7 +107,7 @@
     {
       "name": "DomainController",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/NetworkAndStorage"
       ],
@@ -159,7 +163,7 @@
     {
       "name": "UpdateVNetDNS",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/NetworkAndStorage",
         "Microsoft.Resources/deployments/DomainController",
@@ -187,7 +191,7 @@
     {
       "name": "ADFSserver",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/NetworkAndStorage"
       ],
@@ -240,7 +244,7 @@
     {
       "name": "WAPServer",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/NetworkAndStorage"
       ],
@@ -293,7 +297,7 @@
     {
       "name": "DomainControllerDSC",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainController"
       ],
@@ -334,7 +338,7 @@
     {
       "name": "DomainControllerCS",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainController",
         "Microsoft.Resources/deployments/DomainControllerDSC",
@@ -381,7 +385,7 @@
     {
       "name": "ADFSserverDSC",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainControllerDSC",
         "Microsoft.Resources/deployments/ADFSserver",
@@ -427,7 +431,7 @@
     {
       "name": "ADFSserverCS",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainControllerCS"
       ],
@@ -475,7 +479,7 @@
     {
       "name": "WAPServerDSC",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/DomainControllerDSC",
         "Microsoft.Resources/deployments/WAPServer",
@@ -518,7 +522,7 @@
     {
       "name": "WAPServerCS",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[variables('ApiVersion')]",
+      "apiVersion": "[variables('ApiVersion').Default]",
       "dependsOn": [
         "Microsoft.Resources/deployments/ADFSserverCS"
       ],

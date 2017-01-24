@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "ApiVersion": {
-      "type": "string",
+      "type": "object",
       "metadata": {
         "description": "Azure API version for deployment"
       }
@@ -83,7 +83,7 @@
       "name": "[concat(parameters('envPrefix'),parameters('vmName'),'pip')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "[parameters('ApiVersion')]",
+      "apiVersion": "[parameters('ApiVersion').Network]",
       "dependsOn": [
       ],
       "tags": {
@@ -100,7 +100,7 @@
       "name": "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "[parameters('ApiVersion')]",
+      "apiVersion": "[parameters('ApiVersion').Network]",
       "dependsOn": [
         "[concat(parameters('envPrefix'),parameters('vmName'),'pip')]"
       ],
@@ -128,7 +128,7 @@
       "name": "[concat(parameters('envPrefix'),parameters('vmName'),'nsg')]",
       "type": "Microsoft.Network/networkSecurityGroups",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "[parameters('ApiVersion')]",
+      "apiVersion": "[parameters('ApiVersion').Network]",
       "dependsOn": [
         "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]"
       ],
@@ -165,7 +165,7 @@
       "name": "[concat(parameters('envPrefix'),parameters('vmName'))]",
       "type": "Microsoft.Compute/virtualMachines",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "[parameters('ApiVersion')]",
+      "apiVersion": "[parameters('ApiVersion').Default]",
       "dependsOn": [
         "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
         "[concat(parameters('envPrefix'),parameters('vmName'),'nsg')]"
@@ -220,7 +220,7 @@
     {
       "name": "[concat('Set',parameters('envPrefix'),parameters('vmName'),'SetStaticIP')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "[parameters('ApiVersion')]",
+      "apiVersion": "[parameters('ApiVersion').Default]",
       "dependsOn": [
         "[concat(parameters('envPrefix'),parameters('vmName'),'nic')]",
         "[concat(parameters('envPrefix'),parameters('vmName'),'nsg')]",

@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "ApiVersion": {
-      "type": "string",
+      "type": "object",
       "metadata": {
         "description": "Azure API version for deployment"
       }
@@ -53,7 +53,7 @@
       "name": "[concat(parameters('envPrefix'),parameters('vmName'),'/',parameters('envPrefix'),parameters('vmName'),'dsc')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "[parameters('ApiVersion')]",
+      "apiVersion": "[parameters('ApiVersion').Default]",
       "dependsOn": [
       ],
       "tags": {

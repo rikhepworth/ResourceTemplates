@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "ApiVersion": {
-      "type": "string",
+      "type": "object",
       "metadata": {
         "description": "Azure API version for deployment"
       }
@@ -37,7 +37,7 @@
       "name": "[parameters('nicName')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "[parameters('ApiVersion')]",
+      "apiVersion": "[parameters('ApiVersion').Network]",
       "dependsOn": [
       ],
       "tags": {

@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "ApiVersion": {
-      "type": "string",
+      "type": "object",
       "metadata": {
         "description": "Azure API version for deployment"
       }
@@ -28,7 +28,7 @@
       "name": "[parameters('StorageAccount').Name]",
       "type": "Microsoft.Storage/storageAccounts",
       "location": "[parameters('StorageAccount').Location]",
-      "apiVersion": "[parameters('ApiVersion')]",
+      "apiVersion": "[parameters('ApiVersion').Storage]",
       "dependsOn": [],
       "tags": {
         "displayName": "StorageAccount"
@@ -41,7 +41,7 @@
       "name": "[parameters('VirtualNetwork').Name]",
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "[parameters('ApiVersion')]",
+      "apiVersion": "[parameters('ApiVersion').Network]",
       "dependsOn": [],
       "tags": {
         "displayName": "VirtualNetwork"
