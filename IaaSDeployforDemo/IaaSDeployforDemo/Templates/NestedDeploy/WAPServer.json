@@ -192,7 +192,7 @@
           "osDisk": {
             "name": "[concat(parameters('envPrefix'),parameters('vmName'), '-os-disk')]",
             "vhd": {
-              "uri": "[concat(parameters('StorageEndpoint'), '/vhds/', parameters('envPrefix'),parameters('vmName'), 'os.vhd')]"
+              "uri": "[concat(parameters('StorageEndpoint'), 'vhds/', parameters('envPrefix'),parameters('vmName'), 'os.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
