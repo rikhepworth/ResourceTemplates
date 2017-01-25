@@ -92,14 +92,7 @@
               "direction": "Outbound"
             }
           }
-
-        ],
-        "subnets": [
-          {
-            "id": "[concat(parameters('VirtualNetworkId'),'/subnets/',parameters('VirtualNetwork').Subnet1Name)]"
-          }
         ]
-
       }
     },
 
