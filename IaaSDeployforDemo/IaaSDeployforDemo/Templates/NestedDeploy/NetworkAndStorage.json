@@ -101,7 +101,9 @@
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[parameters('VirtualNetwork').Location]",
       "apiVersion": "[parameters('ApiVersion').Network]",
-      "dependsOn": [],
+      "dependsOn": [
+        "[concat(parameters('VirtualNetwork').Name,'NSG')]"
+      ],
       "tags": {
         "displayName": "VirtualNetwork"
       },
@@ -117,7 +119,7 @@
             "properties": {
               "addressPrefix": "[parameters('VirtualNetwork').Subnet1Prefix]",
               "networkSecurityGroup": {
-                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('VirtualNetwork').Name,'nsg')]"
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', concat(parameters('VirtualNetwork').Name,'nsg'))]"
               }
             }
           }
