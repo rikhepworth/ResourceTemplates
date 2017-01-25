@@ -83,7 +83,7 @@
       "name": "[concat(parameters('envPrefix'),parameters('vmName'),'nsg')]",
       "type": "Microsoft.Network/networkSecurityGroups",
       "location": "[parameters('VirtualNetwork').Location]",
-      "apiVersion": "2015-05-01-preview",
+      "apiVersion": "[parameters('ApiVersion').Network]",
       "dependsOn": [
       ],
 
