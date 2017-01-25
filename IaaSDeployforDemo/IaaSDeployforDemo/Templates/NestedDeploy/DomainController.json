@@ -135,7 +135,19 @@
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
-          }
+          },
+          "dataDisks": [
+            {
+              "vhd": {
+                "uri": "[concat(parameters('StorageEndpoint'), 'vhds/', parameters('envPrefix'),parameters('vmName'),'data-1.vhd')]"
+              },
+              "name": "[concat(parameters('envPrefix'),parameters('vmName'),'datadisk1')]",
+              "createOption": "empty",
+              "caching": "None",
+              "diskSizeGB": "128",
+              "lun": 0
+            }
+          ]
         },
         "networkProfile": {
           "networkInterfaces": [
