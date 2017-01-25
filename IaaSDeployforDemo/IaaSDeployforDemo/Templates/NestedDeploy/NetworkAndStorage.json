@@ -38,6 +38,72 @@
       }
     },
     {
+      "name": "[concat(parameters('VirtualNetwork').Name,'NSG')]",
+      "type": "Microsoft.Network/networkSecurityGroups",
+      "location": "[parameters('VirtualNetwork').Location]",
+      "apiVersion": "[parameters('ApiVersion').Network]",
+      "dependsOn": [
+      ],
+
+      "tags": {
+        "displayName": "NSG"
+      },
+
+      "properties": {
+        "securityRules": [
+          {
+            "name": "default-allow-rdp",
+            "properties": {
+              "protocol": "Tcp",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 1000,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allow-all-inbound",
+            "properties": {
+              "description": "allow-all-inbound",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 100,
+              "direction": "Inbound"
+            }
+          },
+          {
+            "name": "allow-all-outbound",
+            "properties": {
+              "description": "allow-all-outbound",
+              "protocol": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "access": "Allow",
+              "priority": 101,
+              "direction": "Outbound"
+            }
+          }
+
+        ],
+        "subnets": [
+          {
+            "id": "[concat(parameters('VirtualNetworkId'),'/subnets/',parameters('VirtualNetwork').Subnet1Name)]"
+          }
+        ]
+
+      }
+    },
+
+    {
       "name": "[parameters('VirtualNetwork').Name]",
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[parameters('VirtualNetwork').Location]",
@@ -56,7 +122,10 @@
           {
             "name": "[parameters('VirtualNetwork').Subnet1Name]",
             "properties": {
-              "addressPrefix": "[parameters('VirtualNetwork').Subnet1Prefix]"
+              "addressPrefix": "[parameters('VirtualNetwork').Subnet1Prefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('VirtualNetwork').Name,'nsg')]"
+              }
             }
           }
         ]
