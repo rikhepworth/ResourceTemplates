@@ -63,46 +63,17 @@
               "priority": 1000,
               "direction": "Inbound"
             }
-          },
-          {
-            "name": "allow-all-inbound",
-            "properties": {
-              "description": "allow-all-inbound",
-              "protocol": "*",
-              "sourcePortRange": "*",
-              "destinationPortRange": "*",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*",
-              "access": "Allow",
-              "priority": 100,
-              "direction": "Inbound"
-            }
-          },
-          {
-            "name": "allow-all-outbound",
-            "properties": {
-              "description": "allow-all-outbound",
-              "protocol": "*",
-              "sourcePortRange": "*",
-              "destinationPortRange": "*",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*",
-              "access": "Allow",
-              "priority": 101,
-              "direction": "Outbound"
-            }
           }
         ]
       }
     },
-
     {
       "name": "[parameters('VirtualNetwork').Name]",
       "type": "Microsoft.Network/virtualNetworks",
       "location": "[parameters('VirtualNetwork').Location]",
       "apiVersion": "[parameters('ApiVersion').Network]",
       "dependsOn": [
-        "[concat(parameters('VirtualNetwork').Name,'NSG')]"
+        "[resourceId('Microsoft.Network/networkSecurityGroups', concat(parameters('VirtualNetwork').Name,'NSG'))]"
       ],
       "tags": {
         "displayName": "VirtualNetwork"
