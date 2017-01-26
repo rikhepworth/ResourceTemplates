@@ -67,7 +67,7 @@
         ],
         "subnets": [
           {
-            "id": "[resourceId(concat('Microsoft.Network/virtualNetworks/',parameters('VirtualNetwork').Name,'/subnets/'),parameters('VirtualNetwork').Subnet1Name)]"
+            "id": "[resourceId(concat('Microsoft.Network/virtualNetworks/subnets/'),parameters('VirtualNetwork').Name,parameters('VirtualNetwork').Subnet1Name)]"
           }
         ]
       }
