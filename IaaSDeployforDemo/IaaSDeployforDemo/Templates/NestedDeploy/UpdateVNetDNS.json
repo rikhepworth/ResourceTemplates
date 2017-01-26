@@ -45,7 +45,10 @@
           {
             "name": "[parameters('VirtualNetwork').Subnet1Name]",
             "properties": {
-              "addressPrefix": "[parameters('VirtualNetwork').Subnet1Prefix]"
+              "addressPrefix": "[parameters('VirtualNetwork').Subnet1Prefix]",
+              "networkSecurityGroup": {
+                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', concat(parameters('VirtualNetwork').Name,'NSG'))]"
+              }
             }
           }
         ]
