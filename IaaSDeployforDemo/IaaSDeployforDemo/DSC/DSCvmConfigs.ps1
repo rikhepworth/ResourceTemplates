@@ -164,7 +164,7 @@ configuration ADFSserver
 		xWaitForADDomain DscForestWait 
         { 
             DomainName = $DomainName 
-            DomainUserCredential= $Admincreds
+            DomainUserCredential = $Admincreds
             RetryCount = $RetryCount 
             RetryIntervalSec = $RetryIntervalSec 
             DependsOn = "[WindowsFeature]ADPS"      
