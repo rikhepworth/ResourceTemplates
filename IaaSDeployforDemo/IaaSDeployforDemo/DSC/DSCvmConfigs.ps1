@@ -160,7 +160,7 @@ configuration ADFSserver
             Name = "RSAT-AD-PowerShell"
             Ensure = "Present"
 
-        } 
+        }
 		xWaitForADDomain DscForestWait 
         { 
             DomainName = $DomainName 
@@ -174,9 +174,8 @@ configuration ADFSserver
             Name = $env:COMPUTERNAME
             DomainName = $DomainName
             Credential = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($Admincreds.UserName)", $Admincreds.Password)
-			DependsOn = "[xWaitForA#DDomain]DscForestWait"
+			DependsOn = "[xWaitForADDomain]DscForestWait"
         }
-
 		File SrcCopy
 		{
             SourcePath = $fileShare
@@ -186,7 +185,6 @@ configuration ADFSserver
 			Credential = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($Admincreds.UserName)", $Admincreds.Password)
             DependsOn = "[xComputer]DomainJoin"
         }
-
         LocalConfigurationManager 
         {
 		    DebugMode = 'All'
@@ -248,7 +246,6 @@ configuration WAPserver
             Credential = New-Object System.Management.Automation.PSCredential ("${DomainName}\$($Admincreds.UserName)", $Admincreds.Password)
 			DependsOn = "[xWaitForADDomain]DscForestWait"
         }
-
         LocalConfigurationManager 
         {
 		    DebugMode = 'All'
