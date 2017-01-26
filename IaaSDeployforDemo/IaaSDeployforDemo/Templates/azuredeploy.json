@@ -68,15 +68,15 @@
     "vmConfiguration": {
       "dc": {
         "name": "DC",
-        "size": "Standard_A1"
+        "size": "Standard_A2"
       },
       "adfs": {
         "name": "ADFS",
-        "size": "Standard_A1"
+        "size": "Standard_A2"
       },
       "wap": {
         "name": "WAP",
-        "size": "Standard_A1"
+        "size": "Standard_A2"
       }
     }
   },
