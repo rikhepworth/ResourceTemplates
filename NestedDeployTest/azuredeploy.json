@@ -94,7 +94,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(parameters('artifactsLocation'), '/SQLdb/azuredeploy.json')]",
+          "uri": "[concat(parameters('artifactsLocation'), '/SQLDB/azuredeploy.json')]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
@@ -160,8 +160,6 @@
             "displayName": "WebsiteConnectionStrings"
           },
           "properties": {
-            "DefaultConnection": {
-            }
           }
         },
         {
