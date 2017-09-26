@@ -1,0 +1,7 @@
+﻿{
+  "itemDisplayName": "Global Website",
+  "description": "This template deploys a global web site architecture",
+  "summary": "This template deploys the components for a sample global website including web apps, Redis cache, CDN, Traffic Manager, Cosmos DB and storage. Multiple regions can be used for the web app and redis deployments, creating a global infrastructure.",
+  "githubUsername": "rikhepworth",
+  "dateUpdated": "2017-09-26"
+}
