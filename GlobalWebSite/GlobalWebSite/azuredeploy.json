@@ -646,7 +646,7 @@
   "outputs": {
     "TrafficMgrFQDN": {
       "type": "string",
-      "value": "if(greater(length(parameters('WebLocations')),1),[reference(resourceId('Microsoft.Network/trafficManagerProfiles', variables('TrafficMgr').Name)).dnsConfig.fqdn, json('null'))]"
+      "value": "[if(greater(length(parameters('WebLocations')),1), reference(resourceId('Microsoft.Network/trafficManagerProfiles', variables('TrafficMgr').Name)).dnsConfig.fqdn, json('null'))]"
     },
     "StorageName": {
       "type": "string",
